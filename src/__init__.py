@@ -32,3 +32,8 @@ app.logger.removeHandler(default_handler)
 # use the modified encoder class to handle ObjectId & datetime object while jsonifying the response.
 app.json_encoder = JSONEncoder
 # app.run(host='0.0.0.0', port=80, debug=True)
+
+# import the transformer model
+# remember to read the README in folder model
+from transformers import McqModel
+model = McqModel("model/")
