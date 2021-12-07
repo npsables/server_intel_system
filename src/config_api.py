@@ -4,14 +4,14 @@ sys.path.append('..')
 
 from typing import Any, Optional
 
-#import dataclasses
-#from dataclasses import dataclass
-#from dataclasses_json import dataclass_json
+import dataclasses
+from dataclasses import dataclass
+from dataclasses_json import dataclass_json
 from flask import Response, jsonify, Flask
 import src.const as const
     
     
-#@dataclass
+@dataclass
 class ApiResponse(Response):
     default_minetype = 'application/json'
     data: Optional[Any] = None
