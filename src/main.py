@@ -1,6 +1,7 @@
 import os
 import logging
 import sys
+import numpy as np
 # sys.path.append('..')
 from flask import request, jsonify, Flask, render_template, session
 from flask_api import status
@@ -29,12 +30,13 @@ def hello_world():
 
 @app.route('/mass', methods=["GET"])
 def get():
-	args = request.args
-	result = model.inference(args)
-	if type(result) is int:
-		# when return only correct answer
-		return jsonify({"correct_answer": result})
-	else:
-		# return all probabilities
-		answer = [f"answer_{i}" for i in range(4)]
-		return jsonify(dict(zip(answer, result.squeeze())))
+    args = request.args
+    result = model.inference(args)
+    if type(result) is np.int64:
+        # when return only correct answer
+        return jsonify({"correct_answer": int(result)})
+    else:
+        # return all probabilities
+        answer = [f"answer_{i}" for i in range(4)]
+        result = [float(x) for x in result.squeeze()]
+        return jsonify(dict(zip(answer, result)))
