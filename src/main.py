@@ -6,7 +6,7 @@ from flask import request, jsonify, Flask, render_template, session
 from flask_api import status
 
 from src.config_api import ApiResponse
-from src import app, db, model
+from src import app, model
 
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
@@ -17,6 +17,10 @@ formatter = logging.Formatter(
 handler.setFormatter(formatter)
 log.addHandler(handler)
 
+# import the transformer model
+# remember to read the README in folder model
+from src.model import McqModel
+model = McqModel("src/model")
 
 @app.route('/')
 def hello_world():

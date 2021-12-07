@@ -3,7 +3,7 @@ import numpy as np
 from transformers import AutoTokenizer, AutoModelForMultipleChoice
 
 class McqModel:
-	def __init__(self, model_path = "model/"):
+	def __init__(self, model_path = "src/model/"):
 		self.path = model_path
 		self.tokenizer = AutoTokenizer.from_pretrained(model_path)
 		self.model = AutoModelForMultipleChoice.from_pretrained(model_path)
