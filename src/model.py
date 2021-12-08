@@ -3,13 +3,13 @@ import numpy as np
 from transformers import AutoTokenizer, AutoModelForMultipleChoice
 
 class McqModel:
-	def __init__(self, model_path = "src/model/"):
+	def __init__(self, model_path = "model/"):
 		self.path = model_path
 		self.tokenizer = AutoTokenizer.from_pretrained(model_path)
 		self.model = AutoModelForMultipleChoice.from_pretrained(model_path)
 
 	def softmax(self, x):
-		return np.exp(x) / np.sum(np.exp(x), axis=0)
+		return np.exp(x) / np.sum(np.exp(x))
 
 	def inference(self, mcq):
 		# Change format here
@@ -25,7 +25,7 @@ class McqModel:
 
 		choices = [choice0, choice1, choice2, choice3]
 		choices = [choice for choice in choices if choice is not None]
-		number_of_answers = sum(filter(None, choices))
+		number_of_answers = len(choices)
 
 		context = [question]*number_of_answers
 		choices = choices[:number_of_answers]
