@@ -2,6 +2,7 @@ import os
 import json
 from flask.logging import default_handler
 from flask import Flask
+from flask_cors import CORS
 
 from src.config_api import FlaskApp
 
@@ -17,6 +18,7 @@ class JSONEncoder(json.JSONEncoder):
 
 
 app = FlaskApp(__name__)
+CORS(app)
 app.logger.removeHandler(default_handler)
 
 # try:

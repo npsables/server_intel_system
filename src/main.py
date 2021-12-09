@@ -21,7 +21,7 @@ log.addHandler(handler)
 # import the transformer model
 # remember to read the README in folder model
 from src.model import McqModel
-model = McqModel("src/model")
+model = McqModel("model")
 
 @app.route('/')
 def hello_world():

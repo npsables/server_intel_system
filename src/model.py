@@ -9,7 +9,8 @@ class McqModel:
 		self.model = AutoModelForMultipleChoice.from_pretrained(model_path)
 
 	def softmax(self, x):
-		return np.exp(x) / np.sum(np.exp(x), axis=0)
+		return np.exp(x) / np.sum(np.exp(x))
+		
 
 	def inference(self, mcq):
 		# Change format here
@@ -25,10 +26,10 @@ class McqModel:
 
 		choices = [choice0, choice1, choice2, choice3]
 		choices = [choice for choice in choices if choice is not None]
-		number_of_answers = sum(filter(None, choices))
+		number_of_answers = len(choices)
 
 		context = [question]*number_of_answers
-		choices = choices[:number_of_answers]
+		# choices = choices[:number_of_answers]
 
 		encodings = self.tokenizer(context, choices, truncation=True, padding=True)
 		inputs = {k:  torch.tensor([v[i:i+4] for i in range(0, len(v), 4)]) for k, v in encodings.items()}
